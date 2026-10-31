@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+
+  --color-espresso: #2b1a10;
+  --color-cocoa: #4a2c1a;
+  --color-mocha: #7a5a44;
+  --color-sand: #cdb69e;
+  --color-latte: #e9d9c4;
+  --color-cream: #f7efe3;
+  --color-ivory: #fcf8f2;
+  --color-terra: #c8643b;
+  --color-sage: #8a9a7b;
+  --color-sky: #9bb4c4;
+  --color-blush: #e7b7a3;
+  --color-honey: #e2b65c;
+  --color-plum: #6e4a5e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-espresso);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sand);
+  color: var(--color-espresso);
+}
+
+/* Fine grain overlay for an editorial, paper-like feel */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Pinterest-style masonry via CSS columns */
+.masonry {
+  column-gap: 1rem;
+  columns: 1;
+}
+@media (min-width: 560px) {
+  .masonry { columns: 2; }
+}
+@media (min-width: 900px) {
+  .masonry { columns: 3; }
+}
+@media (min-width: 1200px) {
+  .masonry { columns: 4; }
+}
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+.shine {
+  background: linear-gradient(100deg, var(--color-sand) 20%, var(--color-ivory) 40%, var(--color-sand) 60%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s ease-in-out infinite;
+}
+@keyframes shine {
+  0% { background-position: 100% 0; }
+  60%, 100% { background-position: -50% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .shine { animation: none; }
+  html { scroll-behavior: auto; }
+}
