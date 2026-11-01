@@ -8,6 +8,7 @@ const links = [
   { href: '#annuaire', label: 'Annuaire' },
   { href: '#guides', label: 'Guides' },
   { href: '#faq', label: 'FAQ' },
+  { href: '#devis', label: 'Devis gratuit' },
 ]
 
 export function Nav() {
@@ -32,7 +33,7 @@ export function Nav() {
       >
         <Logo light={!scrolled} />
         <ul className="hidden items-center gap-1 md:flex">
-          {links.map((l) => (
+          {links.slice(0, -1).map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -46,10 +47,10 @@ export function Nav() {
           ))}
         </ul>
         <a
-          href="#annuaire"
+          href="#devis"
           className="hidden rounded-full bg-terra px-5 py-2.5 text-sm font-semibold text-ivory transition-transform hover:scale-[1.03] md:inline-block"
         >
-          Explorer l’annuaire
+          Devis gratuit
         </a>
         <button
           className={`rounded-full p-2 md:hidden ${scrolled ? 'text-espresso' : 'text-cream'}`}

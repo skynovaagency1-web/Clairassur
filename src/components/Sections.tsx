@@ -3,6 +3,8 @@ import { ArrowRight, Compass, Layers, MousePointerClick, Plus } from 'lucide-rea
 import { useRef, useState, type FormEvent } from 'react'
 import { categories, categoryById, faqs, guides, type CategoryId } from '../data'
 import { SectionTitle } from './Categories'
+import { postJson } from '../api'
+import { site } from '../config'
 import { Logo } from './Logo'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -21,7 +23,7 @@ const steps = [
   {
     icon: MousePointerClick,
     title: 'Allez à la source',
-    body: 'Chaque fiche renvoie au site officiel pour demander un devis, sans intermédiaire ni commission.',
+    body: 'Demandez un devis sur le site de l’assureur, ou laissez-nous votre besoin : un conseiller partenaire vous recontacte.',
   },
 ]
 
@@ -38,7 +40,7 @@ export function HowItWorks() {
             kicker="Comment ça marche"
             title="Trois gestes,"
             em="zéro jargon."
-            intro="Clairassur ne vend rien. On rassemble, on clarifie, et vous décidez."
+            intro="On rassemble, on clarifie, et vous décidez. Gratuitement."
           />
         </div>
         <div ref={ref} className="relative pl-10">
@@ -165,10 +167,19 @@ export function Faq() {
 }
 
 export function Footer({ onPick }: { onPick: (id: CategoryId) => void }) {
-  const [done, setDone] = useState(false)
-  const submit = (e: FormEvent) => {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle')
+  const [error, setError] = useState('')
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setDone(true)
+    const f = new FormData(e.currentTarget)
+    setStatus('sending')
+    setError('')
+    const res = await postJson('/api/newsletter', { email: f.get('email'), website: f.get('website') })
+    if (res.ok) setStatus('done')
+    else {
+      setStatus('idle')
+      setError(res.error)
+    }
   }
   return (
     <footer className="px-4 pb-6">
@@ -182,25 +193,42 @@ export function Footer({ onPick }: { onPick: (id: CategoryId) => void }) {
             <p className="mt-4 max-w-md text-cream/70">
               Une lettre par mois : nouveaux acteurs, changements de loi et repères pour mieux choisir. Pas de spam.
             </p>
-            {done ? (
+            {status === 'done' ? (
               <p className="mt-8 rounded-full bg-cream/10 px-6 py-4 text-sand">Merci ! Vous êtes bien inscrit·e.</p>
             ) : (
               <form onSubmit={submit} className="mt-8 flex max-w-md gap-2 rounded-full bg-cream/10 p-2">
                 <label htmlFor="nl" className="sr-only">
                   Adresse e-mail
                 </label>
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
                 <input
                   id="nl"
+                  name="email"
                   type="email"
                   required
                   placeholder="votre@email.fr"
                   className="min-w-0 flex-1 bg-transparent px-4 text-cream placeholder:text-cream/40 focus:outline-none"
                 />
-                <button className="rounded-full bg-sand px-5 py-3 text-sm font-semibold text-espresso hover:bg-cream">
-                  S’inscrire
+                <button
+                  disabled={status === 'sending'}
+                  className="rounded-full bg-sand px-5 py-3 text-sm font-semibold text-espresso hover:bg-cream disabled:opacity-60"
+                >
+                  {status === 'sending' ? 'Envoi…' : 'S’inscrire'}
                 </button>
               </form>
             )}
+            {error && (
+              <p role="alert" className="mt-3 text-sm text-blush">
+                {error}
+              </p>
+            )}
+            <p className="mt-3 max-w-md text-xs text-cream/45">
+              Désinscription en un clic dans chaque e-mail. Voir notre{' '}
+              <a href="#/confidentialite" className="underline">
+                politique de confidentialité
+              </a>
+              .
+            </p>
           </div>
           <div className="grid grid-cols-2 gap-8 text-sm">
             <div>
@@ -221,7 +249,11 @@ export function Footer({ onPick }: { onPick: (id: CategoryId) => void }) {
                 <li><a className="hover:text-cream" href="#annuaire">Annuaire</a></li>
                 <li><a className="hover:text-cream" href="#guides">Guides</a></li>
                 <li><a className="hover:text-cream" href="#faq">FAQ</a></li>
-                <li><a className="hover:text-cream" href="mailto:contact@clairassur.fr">Contact</a></li>
+                <li><a className="hover:text-cream" href="#devis">Devis gratuit</a></li>
+                <li><a className="hover:text-cream" href={`mailto:${site.contactEmail}`}>Contact</a></li>
+                <li><a className="hover:text-cream" href="#/mentions-legales">Mentions légales</a></li>
+                <li><a className="hover:text-cream" href="#/confidentialite">Confidentialité</a></li>
+                <li><a className="hover:text-cream" href="#/partenaires">Partenaires</a></li>
               </ul>
             </div>
           </div>
@@ -229,8 +261,8 @@ export function Footer({ onPick }: { onPick: (id: CategoryId) => void }) {
         <div className="relative mt-16 flex flex-col gap-4 border-t border-cream/10 pt-8 text-xs text-cream/50 sm:flex-row sm:items-center sm:justify-between">
           <Logo light />
           <p className="max-w-xl">
-            Clairassur est un annuaire indépendant, ni assureur ni intermédiaire en assurance. Les marques citées
-            appartiennent à leurs propriétaires. © 2026 Clairassur.
+            Clairassur est un annuaire indépendant et n’est pas un assureur. Le site peut être rémunéré par certains
+            partenaires, toujours signalés. Les marques citées appartiennent à leurs propriétaires. © 2026 Clairassur.
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowUpRight, Bookmark, BookmarkCheck, ExternalLink, Search, X } from 'lucide-react'
+import { ArrowUpRight, Bookmark, BookmarkCheck, ExternalLink, Search, Send, X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { categories, categoryById, providers, type CategoryId, type Provider, type ProviderKind } from '../data'
 import { SectionTitle } from './Categories'
@@ -19,6 +19,7 @@ type Props = {
   setQuery: (q: string) => void
   category: CategoryId | 'all'
   setCategory: (c: CategoryId | 'all') => void
+  onQuote: (p: Provider) => void
 }
 
 function useSaved() {
@@ -41,14 +42,14 @@ function useSaved() {
   return { saved, toggle }
 }
 
-export function Directory({ query, setQuery, category, setCategory }: Props) {
+export function Directory({ query, setQuery, category, setCategory, onQuote }: Props) {
   const [kind, setKind] = useState<ProviderKind | 'all'>('all')
   const [open, setOpen] = useState<Provider | null>(null)
   const { saved, toggle } = useSaved()
 
   const results = useMemo(() => {
     const q = normalize(query.trim())
-    return providers.filter((p) => {
+    const list = providers.filter((p) => {
       if (category !== 'all' && !p.categories.includes(category)) return false
       if (kind !== 'all' && p.kind !== kind) return false
       if (!q) return true
@@ -57,6 +58,8 @@ export function Directory({ query, setQuery, category, setCategory }: Props) {
       )
       return q.split(/\s+/).every((t) => hay.includes(t))
     })
+    // Paid placements first; stable order otherwise.
+    return [...list.filter((p) => p.sponsored), ...list.filter((p) => !p.sponsored)]
   }, [query, category, kind])
 
   const active = category === 'all' ? null : categoryById[category]
@@ -164,6 +167,10 @@ export function Directory({ query, setQuery, category, setCategory }: Props) {
             saved={saved.includes(open.name)}
             onSave={() => toggle(open.name)}
             onClose={() => setOpen(null)}
+            onQuote={() => {
+              setOpen(null)
+              onQuote(open)
+            }}
           />
         )}
       </AnimatePresence>
@@ -254,6 +261,7 @@ function ProviderPin({
               {p.kind}
             </span>
           </div>
+          {p.sponsored && <SponsoredBadge />}
           <p className="mt-2 text-sm leading-relaxed text-espresso/70">{p.pitch}</p>
           <ul className="mt-4 flex flex-wrap gap-1.5">
             {p.categories.map((c) => (
@@ -314,11 +322,13 @@ function ProviderSheet({
   saved,
   onSave,
   onClose,
+  onQuote,
 }: {
   p: Provider
   saved: boolean
   onSave: () => void
   onClose: () => void
+  onQuote: () => void
 }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
@@ -390,11 +400,22 @@ function ProviderSheet({
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex flex-col gap-2 sm:flex-row">
+          {p.sponsored && (
+            <div className="mt-6">
+              <SponsoredBadge link />
+            </div>
+          )}
+          <button
+            onClick={onQuote}
+            className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-terra px-5 py-3.5 font-semibold text-ivory transition hover:bg-cocoa"
+          >
+            <Send className="size-4" /> Être rappelé pour un devis gratuit
+          </button>
+          <div className="mt-2 flex flex-col gap-2 sm:flex-row">
             <a
-              href={p.website}
+              href={p.partnerUrl ?? p.website}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={p.partnerUrl ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
               className="flex flex-1 items-center justify-center gap-2 rounded-full bg-espresso px-5 py-3.5 font-semibold text-cream transition hover:bg-cocoa"
             >
               Site officiel <ExternalLink className="size-4" />
@@ -409,11 +430,28 @@ function ProviderSheet({
             </button>
           </div>
           <p className="mt-5 text-xs leading-relaxed text-espresso/50">
-            Informations indicatives. Clairassur n’est ni assureur ni courtier : vérifiez les garanties et tarifs sur le site
-            de l’assureur.
+            Informations indicatives : vérifiez les garanties et tarifs sur le site de l’assureur.
+            {p.partnerUrl && ' Lien partenaire : Clairassur peut être rémunéré si vous souscrivez, sans surcoût pour vous.'}{' '}
+            <a href="#/partenaires" className="underline">
+              En savoir plus
+            </a>
           </p>
         </div>
       </motion.div>
     </motion.div>
+  )
+}
+
+function SponsoredBadge({ link = false }: { link?: boolean }) {
+  const cls = 'mt-2 inline-flex rounded-full bg-honey/30 px-2.5 py-1 text-[11px] font-semibold text-cocoa'
+  const title = 'Ce partenaire paie pour être mis en avant'
+  return link ? (
+    <a href="#/partenaires" className={cls} title={title}>
+      Sponsorisé · en savoir plus
+    </a>
+  ) : (
+    <span className={cls} title={title}>
+      Sponsorisé
+    </span>
   )
 }

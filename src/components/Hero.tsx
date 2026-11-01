@@ -132,6 +132,16 @@ export function Hero({ onSearch, onPickCategory }: Props) {
             ))}
           </motion.ul>
 
+          <motion.a
+            href="#devis"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-sand underline-offset-4 hover:underline"
+          >
+            Pas le temps de chercher ? Recevez des devis gratuits <ArrowRight className="size-4" />
+          </motion.a>
+
           <motion.dl
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -141,7 +151,7 @@ export function Hero({ onSearch, onPickCategory }: Props) {
             {[
               [providers.length + '+', 'acteurs référencés'],
               ['6', 'types d’assurance'],
-              ['0 €', 'commission perçue'],
+              ['0 €', 'pour vous, toujours'],
             ].map(([n, l]) => (
               <div key={l}>
                 <dt className="sr-only">{l}</dt>

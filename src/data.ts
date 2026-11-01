@@ -112,6 +112,10 @@ export type Provider = {
   highlights: string[]
   website: string
   tone: string
+  /** Paid placement: shown first with a "Sponsorisé" badge. Only set for real, signed partners. */
+  sponsored?: boolean
+  /** Affiliate / tracking link from a partner programme. Used instead of `website` when set. */
+  partnerUrl?: string
 }
 
 export const providers: Provider[] = [
@@ -403,11 +407,11 @@ export const guides: Guide[] = [
 export const faqs = [
   {
     q: 'Clairassur est-il un assureur ou un courtier ?',
-    a: "Non. Clairassur est un annuaire indépendant : nous vous aidons à découvrir les acteurs de l'assurance en France. Nous ne vendons pas de contrats et ne percevons pas de commission sur votre souscription.",
+    a: "Non. Clairassur est un annuaire indépendant : nous vous aidons à découvrir les acteurs de l'assurance en France. Nous ne vendons pas de contrats. Le site est gratuit pour vous et financé par certains partenaires (fiches sponsorisées, liens partenaires, mise en relation), toujours signalés. Détails sur la page « Partenaires et rémunération ».",
   },
   {
     q: 'Comment sont choisis les assureurs présentés ?',
-    a: "Nous référençons des assureurs, mutuelles, néo-assureurs et spécialistes actifs en France, classés par type d'assurance. L'ordre d'affichage ne constitue pas un classement ni une recommandation.",
+    a: "Nous référençons des assureurs, mutuelles, néo-assureurs et spécialistes actifs en France, classés par type d'assurance. Les fiches sponsorisées sont signalées comme telles ; en dehors d'elles, l'ordre d'affichage ne constitue pas un classement ni une recommandation.",
   },
   {
     q: 'Les informations sont-elles à jour ?',
