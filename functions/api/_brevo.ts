@@ -5,6 +5,8 @@ export type Env = {
   BREVO_API_KEY: string
   /** Where new quote requests are emailed, e.g. "leads@clairassur.fr" */
   LEAD_TO_EMAIL: string
+  /** Where contact-form messages go (defaults to LEAD_TO_EMAIL) */
+  CONTACT_TO_EMAIL?: string
   /** Verified Brevo sender, e.g. "no-reply@clairassur.fr" */
   SENDER_EMAIL: string
   /** Brevo list id for newsletter subscribers */

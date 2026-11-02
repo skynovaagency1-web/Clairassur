@@ -1,48 +1,38 @@
-import { ArrowLeft } from 'lucide-react'
-import { useEffect, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { Link } from 'react-router'
 import { site } from '../config'
-import { legalPages, type LegalPage } from '../legal'
-import { Logo } from './Logo'
+import { PageIntro } from './PageIntro'
+import { Section } from './ui'
 
+export type LegalPage = 'mentions-legales' | 'confidentialite' | 'partenaires'
+
+export const legalPages: Record<LegalPage, string> = {
+  'mentions-legales': 'Mentions légales',
+  confidentialite: 'Politique de confidentialité',
+  partenaires: 'Partenaires et rémunération',
+}
 
 const c = site.company
 
 export function Legal({ page }: { page: LegalPage }) {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    document.title = `${legalPages[page]} · Clairassur`
-    return () => {
-      document.title = 'Clairassur · L’annuaire de l’assurance en France'
-    }
-  }, [page])
-
   return (
-    <div className="min-h-screen bg-ivory">
-      <header className="border-b border-espresso/10 px-4 py-5">
-        <div className="mx-auto flex max-w-3xl items-center justify-between">
-          <Logo />
-          <a href="#top" className="flex items-center gap-1.5 text-sm font-semibold text-terra">
-            <ArrowLeft className="size-4" /> Retour au site
-          </a>
-        </div>
-      </header>
-      <main className="mx-auto max-w-3xl px-4 py-16">
-        <h1 className="font-serif text-5xl tracking-tight">{legalPages[page]}</h1>
-        <p className="mt-3 text-sm text-espresso/50">Dernière mise à jour : 1er novembre 2026</p>
-        <div className="mt-10 space-y-8 leading-relaxed text-espresso/80 [&_a]:text-terra [&_a]:underline [&_h2]:mb-3 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-espresso [&_li]:ml-5 [&_li]:list-disc [&_p+p]:mt-3">
+    <>
+      <PageIntro crumbs={[{ label: legalPages[page] }]} label="Dernière mise à jour · 2 novembre 2026" title={legalPages[page]} />
+      <Section className="pt-0!">
+        <div className="glass max-w-3xl space-y-10 p-6 leading-relaxed text-ink/90 sm:p-10 [&_a]:text-taupe-deep [&_a]:underline [&_h2]:mb-3 [&_h2]:font-serif [&_h2]:text-[1.9rem] [&_h2]:font-medium [&_h2]:text-ink [&_li]:ml-5 [&_li]:list-disc [&_p+p]:mt-3">
           {page === 'mentions-legales' && <Mentions />}
           {page === 'confidentialite' && <Privacy />}
           {page === 'partenaires' && <Partners />}
         </div>
-        <nav className="mt-16 flex flex-wrap gap-4 border-t border-espresso/10 pt-6 text-sm">
-          {Object.entries(legalPages).map(([k, v]) => (
-            <a key={k} href={`#/${k}`} className={k === page ? 'font-semibold' : 'text-espresso/60 hover:text-espresso'}>
-              {v}
-            </a>
+        <nav aria-label="Pages légales" className="mt-8 flex flex-wrap gap-2">
+          {(Object.keys(legalPages) as LegalPage[]).map((k) => (
+            <Link key={k} to={`/${k}`} aria-current={k === page ? 'page' : undefined} className={`pill ${k === page ? 'pill-sand' : 'pill-clear'}`}>
+              {legalPages[k]}
+            </Link>
           ))}
         </nav>
-      </main>
-    </div>
+      </Section>
+    </>
   )
 }
 

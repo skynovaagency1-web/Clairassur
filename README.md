@@ -4,33 +4,40 @@ L'annuaire de l'assurance en France : auto, habitation, santé, vie, moto et pro
 
 ## Stack
 
-- Vite + React + TypeScript
-- Tailwind CSS v4
-- Motion (animations au scroll, parallaxe, transitions)
-- lucide-react (icônes)
+- Vite + React + TypeScript, react-router
+- Tailwind CSS v4 : style « liquid glass » (tokens et classes `.glass`, `.pill`, `.mono`, `.field` dans `src/index.css`)
+- Polices : Cormorant Garamond (titres), Jost (texte), Martian Mono (libellés)
+- Motion (apparitions au scroll), lucide-react (icônes)
 
 ## Démarrer
 
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm run build    # build de production dans dist/
+npm run build    # build + pré-rendu de chaque page dans dist/
 ```
 
-## Structure
+`npm run build` pré-rend chaque page en HTML statique (`scripts/prerender.mjs`) : titre, description, URL canonique et données structurées propres à chaque page, plus `sitemap.xml`, `robots.txt` et `404.html`.
 
-- `src/data.ts` : catégories, assureurs, guides et FAQ (contenu à éditer ici)
-- `src/components/Hero.tsx` : hero sombre avec collage d'« épingles » en parallaxe
-- `src/components/Categories.tsx` : bento des 6 types d'assurance + bandeau défilant
-- `src/components/Directory.tsx` : annuaire en grille masonry type Pinterest (recherche, filtres, épingles, fiche détaillée)
-- `src/components/Sections.tsx` : « Comment ça marche », guides, FAQ, newsletter et pied de page
+## Pages
 
-- `src/components/QuoteForm.tsx` : formulaire « Recevez des devis » (génération de leads)
-- `src/components/Legal.tsx` : mentions légales, confidentialité, partenaires (`#/mentions-legales`, `#/confidentialite`, `#/partenaires`)
+- `/` accueil · `/devis` · `/contact` · `/a-propos`
+- 6 pages par type : `/assurance-auto`, `/assurance-habitation`, `/mutuelle-sante`, `/assurance-vie`, `/assurance-moto`, `/assurance-professionnelle`
+- `/assureurs` (annuaire filtrable) et une fiche par assureur `/assureurs/<nom>`
+- `/guides` et 6 guides `/guides/<slug>`
+- `/mentions-legales`, `/confidentialite`, `/partenaires`
+
+## Où modifier le contenu
+
+- `src/data.ts` : assureurs, catégories, FAQ générale
+- `src/content/categories.ts` : texte des pages par type, et prix « à partir de » (`offerMeta`)
+- `src/content/guides.ts` : guides
+- `src/content/photos.ts` : photos Unsplash (créditées sous chaque image)
 - `src/config.ts` : coordonnées de la société, à compléter avant la mise en ligne
-- `functions/api/` : fonctions Cloudflare Pages (`/api/lead`, `/api/newsletter`) qui envoient les leads par e-mail et inscrivent à la newsletter via Brevo
+- `src/routes.tsx` : liste des pages, titres et descriptions SEO
+- `functions/api/` : fonctions Cloudflare Pages (`/api/lead`, `/api/newsletter`, `/api/contact`) via Brevo
 
-Les épingles sont gardées dans le `localStorage` du navigateur.
+**Prix indicatifs** : les montants « à partir de » sont des exemples. Vérifiez-les avant la mise en ligne, ou retirez-les.
 
 ## Mise en ligne sur Cloudflare Pages
 
@@ -45,6 +52,7 @@ Les épingles sont gardées dans le `localStorage` du navigateur.
 | `SENDER_EMAIL` | `no-reply@clairassur.fr` | Expéditeur vérifié dans Brevo |
 | `BREVO_NEWSLETTER_LIST_ID` | `3` | Liste Brevo des abonnés newsletter |
 | `BREVO_LEADS_LIST_ID` (optionnel) | `4` | Liste Brevo où copier les leads |
+| `CONTACT_TO_EMAIL` (optionnel) | `contact@clairassur.fr` | Reçoit les messages du formulaire de contact (sinon `LEAD_TO_EMAIL`) |
 
 4. Custom domains : ajoutez votre domaine.
 5. Optionnel : activez Cloudflare Web Analytics (sans cookie, pas de bandeau nécessaire).

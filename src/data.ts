@@ -337,72 +337,15 @@ export const providers: Provider[] = [
   },
 ]
 
-export type Guide = {
-  title: string
-  profile: string
-  body: string
-  categories: CategoryId[]
-  color: string
-  ink: string
-  size: 'sm' | 'md' | 'lg'
-}
+export const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
 
-export const guides: Guide[] = [
-  {
-    profile: 'Jeune conducteur',
-    title: 'Premier permis, première assurance',
-    body: 'La conduite accompagnée et le bonus progressif font baisser la note. Regardez aussi les offres au kilomètre.',
-    categories: ['auto'],
-    color: '#c8643b',
-    ink: '#fff6ee',
-    size: 'lg',
-  },
-  {
-    profile: 'Premier appartement',
-    title: 'Locataire : ce qui est obligatoire',
-    body: 'Le bailleur peut exiger une attestation « risques locatifs ». Une multirisque habitation protège aussi vos affaires.',
-    categories: ['habitation'],
-    color: '#8a9a7b',
-    ink: '#f6f8f1',
-    size: 'md',
-  },
-  {
-    profile: 'Freelance',
-    title: 'RC Pro : en avez-vous besoin ?',
-    body: 'Obligatoire pour certaines professions réglementées, vivement conseillée pour toutes les autres.',
-    categories: ['pro'],
-    color: '#9bb4c4',
-    ink: '#13232d',
-    size: 'sm',
-  },
-  {
-    profile: 'Famille',
-    title: 'Une mutuelle pour toute la tribu',
-    body: 'Comparez l’optique, le dentaire et l’orthodontie : ce sont les postes qui comptent le plus avec des enfants.',
-    categories: ['sante'],
-    color: '#e7b7a3',
-    ink: '#3a1d12',
-    size: 'md',
-  },
-  {
-    profile: 'Motard',
-    title: 'Bien couvrir son équipement',
-    body: 'Casque, blouson, gants : vérifiez le plafond de la garantie équipement et la garantie du pilote.',
-    categories: ['moto'],
-    color: '#e2b65c',
-    ink: '#2b1a10',
-    size: 'sm',
-  },
-  {
-    profile: 'Épargnant',
-    title: 'Assurance vie : les bons réflexes',
-    body: 'Regardez les frais sur versements et de gestion, et la part d’unités de compte selon votre horizon.',
-    categories: ['vie'],
-    color: '#6e4a5e',
-    ink: '#fbf1f6',
-    size: 'lg',
-  },
-]
+export const providerPath = (p: Provider) => `/assureurs/${slugify(p.name)}`
 
 export const faqs = [
   {
