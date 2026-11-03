@@ -28,14 +28,8 @@
   "r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "clairassur-photos" }],
   // Daily clean-up: deletes leads and messages older than 3 years (see the privacy policy).
   "triggers": { "crons": ["0 3 * * *"] },
-  // Non-secret settings. Secrets (BREVO_API_KEY, ADMIN_PASSWORD) are set in the dashboard.
-  "vars": {
-    "LEAD_TO_EMAIL": "",
-    "CONTACT_TO_EMAIL": "",
-    "SENDER_EMAIL": "",
-    "BREVO_NEWSLETTER_LIST_ID": "",
-    "BREVO_LEADS_LIST_ID": ""
-  },
+  // Settings (ADMIN_PASSWORD, BREVO_API_KEY, LEAD_TO_EMAIL…) live in the dashboard, not here:
+  // a value listed in this file would overwrite the dashboard one on every deploy. See README.
   // Keeps the dashboard values when you deploy, so settings you add there are not wiped.
   "keep_vars": true
 }
