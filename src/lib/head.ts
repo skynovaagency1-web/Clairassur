@@ -1,3 +1,4 @@
+import { site } from '../config'
 import { useEffect } from 'react'
 
 export type Head = {
@@ -7,7 +8,7 @@ export type Head = {
   jsonLd?: object[]
 }
 
-export const SITE_URL = 'https://clairassur.fr'
+export const SITE_URL = site.url
 export const DEFAULT_TITLE = 'Clairassur · L’annuaire de l’assurance en France'
 
 /** Keeps the title and description in sync during client-side navigation.

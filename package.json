@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck:worker": "tsc -p worker/tsconfig.json",
+    "dev:worker": "npm run build && wrangler d1 migrations apply clairassur-db --local && wrangler dev",
+    "db:migrate": "wrangler d1 migrations apply clairassur-db --remote",
+    "deploy": "wrangler d1 migrations apply clairassur-db --remote && wrangler deploy"
   },
   "dependencies": {
     "lucide-react": "^1.66.0",
@@ -17,6 +21,7 @@
     "react-router": "^7.18.5"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261103.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
@@ -25,6 +30,7 @@
     "oxlint": "^1.89.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~7.0.2",
-    "vite": "^8.3.5"
+    "vite": "^8.3.5",
+    "wrangler": "^4.157.0"
   }
 }
