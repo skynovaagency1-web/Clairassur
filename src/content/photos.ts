@@ -1,5 +1,6 @@
 // Free-licence photos from Unsplash (https://unsplash.com/license), credited under each image.
-// Served from Unsplash's image CDN, resized on the fly.
+// On the live site they are served from Cloudflare R2 by the Worker (/img/<id>?w=…, see worker/photos.ts).
+// In local dev and single-file previews they come straight from Unsplash's CDN.
 
 export type Photo = { id: string; alt: string; author: string; page: string }
 
@@ -54,7 +55,13 @@ export const photos = {
   },
 } satisfies Record<string, Photo>
 
-export const photoUrl = (p: Photo, w = 1600) =>
-  `https://images.unsplash.com/${p.id}?auto=format&fit=crop&w=${w}&q=72`
+export const PHOTO_WIDTHS = [640, 1024, 1600, 2200]
 
-export const photoSrcSet = (p: Photo) => [640, 1024, 1600, 2200].map((w) => `${photoUrl(p, w)} ${w}w`).join(', ')
+// import.meta.env is set by Vite only; the Worker imports this file too.
+const env = (import.meta as { env?: { DEV?: boolean; VITE_HASH_ROUTER?: string } }).env
+const fromUnsplash = Boolean(env?.DEV || env?.VITE_HASH_ROUTER)
+
+export const photoUrl = (p: Photo, w = 1600) =>
+  fromUnsplash ? `https://images.unsplash.com/${p.id}?auto=format&fit=crop&w=${w}&q=72` : `/img/${p.id}?w=${w}`
+
+export const photoSrcSet = (p: Photo) => PHOTO_WIDTHS.map((w) => `${photoUrl(p, w)} ${w}w`).join(', ')

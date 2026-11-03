@@ -4,10 +4,11 @@ import { site } from '../config'
 import { PageIntro } from './PageIntro'
 import { Section } from './ui'
 
-export type LegalPage = 'mentions-legales' | 'confidentialite' | 'partenaires'
+export type LegalPage = 'mentions-legales' | 'cgu' | 'confidentialite' | 'partenaires'
 
 export const legalPages: Record<LegalPage, string> = {
   'mentions-legales': 'Mentions légales',
+  cgu: 'Conditions générales d’utilisation',
   confidentialite: 'Politique de confidentialité',
   partenaires: 'Partenaires et rémunération',
 }
@@ -21,6 +22,7 @@ export function Legal({ page }: { page: LegalPage }) {
       <Section className="pt-0!">
         <div className="glass max-w-3xl space-y-10 p-6 leading-relaxed text-ink/90 sm:p-10 [&_a]:text-taupe-deep [&_a]:underline [&_h2]:mb-3 [&_h2]:font-serif [&_h2]:text-[1.9rem] [&_h2]:font-medium [&_h2]:text-ink [&_li]:ml-5 [&_li]:list-disc [&_p+p]:mt-3">
           {page === 'mentions-legales' && <Mentions />}
+          {page === 'cgu' && <Terms />}
           {page === 'confidentialite' && <Privacy />}
           {page === 'partenaires' && <Partners />}
         </div>
@@ -129,13 +131,16 @@ function Privacy() {
       <S title="Destinataires">
         <p>
           Vos données sont accessibles à l’éditeur et, pour les demandes de devis, aux conseillers partenaires à qui votre
-          demande est transmise. Nos sous-traitants techniques sont Cloudflare (hébergement) et Brevo (envoi d’e-mails,
-          France). Vos données ne sont pas vendues à des tiers sans votre consentement.
+          demande est transmise. Nos sous-traitants techniques sont Cloudflare (hébergement du site et stockage des demandes,
+          base de données située en Europe de l’Ouest) et Brevo (envoi d’e-mails, France). Cloudflare est une société
+          américaine : les éventuels transferts hors de l’Union européenne sont encadrés par les clauses contractuelles
+          types de la Commission européenne et le Data Privacy Framework. Vos données ne sont pas vendues à des tiers sans votre consentement.
         </p>
       </S>
       <S title="Durée de conservation">
         <p>
-          Demandes de devis : 3 ans à compter du dernier contact. Newsletter : jusqu’à votre désinscription.
+          Demandes de devis et messages : 3 ans, puis suppression automatique. Newsletter : jusqu’à votre
+          désinscription.
         </p>
       </S>
       <S title="Cookies et mesure d’audience">
@@ -153,6 +158,71 @@ function Privacy() {
           Vous disposez d’un droit d’accès, de rectification, d’effacement, d’opposition, de limitation et de portabilité
           de vos données. Écrivez-nous à <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>. Vous pouvez
           aussi introduire une réclamation auprès de la <a href="https://www.cnil.fr">CNIL</a>.
+        </p>
+      </S>
+    </>
+  )
+}
+
+function Terms() {
+  return (
+    <>
+      <S title="Objet">
+        <p>
+          Les présentes conditions encadrent l’utilisation du site {site.url}, édité par {c.legalName}. En utilisant le
+          site, vous les acceptez. Elles peuvent être modifiées à tout moment ; la version en ligne fait foi.
+        </p>
+      </S>
+      <S title="Le service">
+        <p>
+          Clairassur est un annuaire d’information gratuit sur les assureurs et les assurances en France. Clairassur
+          n’est pas un assureur, ne vend aucun contrat et ne donne pas de conseil personnalisé au sens du Code des
+          assurances. Les demandes de devis sont transmises, avec votre accord, à des conseillers partenaires qui vous
+          recontactent directement.
+        </p>
+      </S>
+      <S title="Informations publiées">
+        <p>
+          Nous faisons notre possible pour tenir les informations à jour, mais elles sont fournies à titre indicatif :
+          garanties, tarifs et conditions évoluent. Avant de souscrire, vérifiez toujours les documents contractuels de
+          l’assureur (conditions générales, document d’information normalisé). Les prix « à partir de » sont des
+          exemples et ne constituent pas une offre.
+        </p>
+      </S>
+      <S title="Utilisation du site">
+        <ul className="space-y-2">
+          <li>Vous vous engagez à fournir des informations exactes dans les formulaires.</li>
+          <li>
+            Il est interdit d’envoyer des demandes pour le compte d’un tiers sans son accord, de perturber le site ou
+            d’en extraire le contenu de manière automatisée.
+          </li>
+          <li>Nous pouvons suspendre l’accès au site pour maintenance ou en cas d’usage abusif.</li>
+        </ul>
+      </S>
+      <S title="Liens et partenaires">
+        <p>
+          Le site contient des liens vers des sites tiers, dont certains sont des liens partenaires (voir{' '}
+          <Link to="/partenaires">Partenaires et rémunération</Link>). Nous ne sommes pas responsables du contenu de ces
+          sites ni des contrats que vous y concluez.
+        </p>
+      </S>
+      <S title="Responsabilité">
+        <p>
+          Clairassur ne peut être tenu responsable d’un choix d’assurance fait sur la base des informations du site, ni
+          d’une indisponibilité temporaire du service. Le contrat que vous signez vous lie uniquement à l’assureur ou
+          à l’intermédiaire concerné.
+        </p>
+      </S>
+      <S title="Données personnelles">
+        <p>
+          Le traitement de vos données est décrit dans notre <Link to="/confidentialite">politique de confidentialité</Link>.
+        </p>
+      </S>
+      <S title="Droit applicable">
+        <p>
+          Ces conditions sont soumises au droit français. En cas de litige, une solution amiable sera recherchée en
+          priorité ; à défaut, les tribunaux français sont compétents. Contact :{' '}
+          <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.
         </p>
       </S>
     </>

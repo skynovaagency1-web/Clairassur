@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { Route, Routes } from 'react-router'
 import { Layout } from './components/Layout'
+import { site } from './config'
 import { Legal, legalPages, type LegalPage } from './components/Legal'
 import { breadcrumbJsonLd, faqJsonLd } from './lib/jsonld'
 import { categoryPages } from './content/categories'
@@ -35,7 +36,7 @@ export const siteRoutes: SiteRoute[] = [
           '@context': 'https://schema.org',
           '@type': 'WebSite',
           name: 'Clairassur',
-          url: 'https://clairassur.fr/',
+          url: `${site.url}/`,
           inLanguage: 'fr-FR',
         },
         faqJsonLd(faqs),

@@ -1,6 +1,6 @@
 export type ApiResult = { ok: true } | { ok: false; error: string }
 
-/** POST JSON to one of the Cloudflare Pages Functions in /functions/api. */
+/** POST JSON to one of the Worker endpoints in worker/forms.ts. */
 export async function postJson(path: string, body: unknown): Promise<ApiResult> {
   try {
     const res = await fetch(path, {

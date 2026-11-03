@@ -1,0 +1,35 @@
+// Cloudflare Worker for clairassur: static pages (dist/) + API + admin inbox.
+// Docs: https://developers.cloudflare.com/workers/wrangler/configuration/
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "clairassur",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Prerendered pages are written as /path.html and served at /path.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    // Only these paths reach the Worker code; every other page is served straight from the CDN.
+    "run_worker_first": ["/api/*", "/admin", "/admin/*", "/img/*"]
+  },
+  // Leads, contact messages and newsletter subscribers (schema in migrations/).
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "clairassur-db",
+      "database_id": "34ba6832-9ee0-4f64-8dc4-f94c64e1165c",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // Copies of the site photos, so images are served from Cloudflare instead of Unsplash.
+  "r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "clairassur-photos" }],
+  // Daily clean-up: deletes leads and messages older than 3 years (see the privacy policy).
+  "triggers": { "crons": ["0 3 * * *"] },
+  // Settings (ADMIN_PASSWORD, BREVO_API_KEY, LEAD_TO_EMAIL…) live in the dashboard, not here:
+  // a value listed in this file would overwrite the dashboard one on every deploy. See README.
+  // Keeps the dashboard values when you deploy, so settings you add there are not wiped.
+  "keep_vars": true
+}

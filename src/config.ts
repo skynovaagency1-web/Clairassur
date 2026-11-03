@@ -2,8 +2,9 @@
 // Replace every "[À compléter]" before going live.
 export const site = {
   name: 'Clairassur',
-  url: 'https://clairassur.fr',
-  contactEmail: 'contact@clairassur.fr',
+  /** Your domain: used for canonical URLs, the sitemap and structured data. */
+  url: 'https://clairassur.com',
+  contactEmail: 'contact@clairassur.com',
   company: {
     legalName: '[À compléter : raison sociale]',
     legalForm: '[À compléter : micro-entreprise, SAS…]',

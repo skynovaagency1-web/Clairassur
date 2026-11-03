@@ -20,10 +20,28 @@ function ScrollManager() {
   return null
 }
 
+/** Feeds the cursor position to hovered cards so their light follows it (see .glass-lift in index.css). */
+function PointerLight() {
+  useEffect(() => {
+    const move = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return
+      const card = (e.target as Element | null)?.closest?.<HTMLElement>('.glass-lift, .glow')
+      if (!card) return
+      const r = card.getBoundingClientRect()
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`)
+      card.style.setProperty('--my', `${e.clientY - r.top}px`)
+    }
+    window.addEventListener('pointermove', move, { passive: true })
+    return () => window.removeEventListener('pointermove', move)
+  }, [])
+  return null
+}
+
 export function Layout() {
   return (
     <MotionConfig reducedMotion="user">
       <ScrollManager />
+      <PointerLight />
       <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-full focus:bg-olive-dark focus:px-4 focus:py-2 focus:text-cream">
         Aller au contenu
       </a>

@@ -94,6 +94,41 @@ body::before {
     inset 0 1px 0 rgb(255 255 255 / 0.9);
 }
 
+/* Hover light: a soft glow follows the cursor across the card, with a warm rim on the edge.
+   --mx/--my are set by <PointerLight /> in Layout. */
+.glass-lift::before,
+.glass-lift::after,
+.glow::before,
+.glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.glass-lift::after,
+.glow::after {
+  background: radial-gradient(20rem circle at var(--mx, 50%) var(--my, 0%), rgb(216 193 168 / 0.55), rgb(216 193 168 / 0.2) 40%, transparent 70%);
+  mix-blend-mode: multiply;
+}
+.glass-lift::before,
+.glow::before {
+  inset: -1px;
+  padding: 2px;
+  background: radial-gradient(14rem circle at var(--mx, 50%) var(--my, 0%), var(--color-taupe-deep), rgb(156 126 99 / 0.55) 30%, transparent 65%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.glass-lift:hover::before,
+.glass-lift:hover::after,
+.glow:hover::before,
+.glow:hover::after {
+  opacity: 1;
+}
+
 /* Glass pill buttons */
 .pill {
   display: inline-flex;
@@ -205,4 +240,5 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .glass-lift:hover, .pill:hover { transform: none; }
+  .glass-lift::before, .glass-lift::after, .glow::before, .glow::after { transition: none; }
 }

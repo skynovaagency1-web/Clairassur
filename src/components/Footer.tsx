@@ -91,6 +91,7 @@ export function Footer() {
           <p>© 2026 {site.name}. Annuaire indépendant, n’est pas un assureur.</p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             <li><Link to="/mentions-legales" className="hover:text-ink">Mentions légales</Link></li>
+            <li><Link to="/cgu" className="hover:text-ink">CGU</Link></li>
             <li><Link to="/confidentialite" className="hover:text-ink">Confidentialité</Link></li>
             <li><Link to="/partenaires" className="hover:text-ink">Partenaires</Link></li>
           </ul>
