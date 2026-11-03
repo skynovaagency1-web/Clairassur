@@ -71,7 +71,7 @@ La base D1 et le bucket R2 existent déjà dans le compte Cloudflare, et les tab
 ```bash
 npm run dev:worker   # build + Worker en local avec D1/R2 simulés (http://localhost:8787)
 npm run db:migrate   # applique les nouvelles migrations à la base D1 en ligne
-npm run deploy       # migrations + déploiement (après `npx wrangler login`)
+npm run deploy       # migrations + déploiement manuel (après `npx wrangler login`)
 ```
 
 Le domaine du site se règle dans `src/config.ts` (`url`).
