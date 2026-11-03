@@ -24,7 +24,18 @@ export function Mono({ children, className = '' }: { children: ReactNode; classN
 }
 
 /** Dark primary CTA with a round arrow chip. */
-export function CtaPill({ to, children, className = '' }: { to: string; children: ReactNode; className?: string }) {
+export function CtaPill({
+  to,
+  children,
+  className = '',
+  sponsored = to.startsWith('http'),
+}: {
+  to: string
+  children: ReactNode
+  className?: string
+  /** Marks outbound links as paid (rel="sponsored"). Defaults to true for external links. */
+  sponsored?: boolean
+}) {
   const inner = (
     <>
       <span>{children}</span>
@@ -34,7 +45,7 @@ export function CtaPill({ to, children, className = '' }: { to: string; children
     </>
   )
   return to.startsWith('http') ? (
-    <a href={to} className={`pill pill-dark ${className}`} target="_blank" rel="noopener noreferrer">
+    <a href={to} className={`pill pill-dark ${className}`} target="_blank" rel={`${sponsored ? 'sponsored ' : ''}noopener noreferrer`}>
       {inner}
     </a>
   ) : (

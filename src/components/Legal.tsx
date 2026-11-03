@@ -140,8 +140,12 @@ function Privacy() {
       </S>
       <S title="Cookies et mesure d’audience">
         <p>
-          Ce site ne dépose pas de cookie publicitaire. La mesure d’audience, si elle est activée, utilise Cloudflare Web
-          Analytics, qui ne dépose pas de cookie et ne suit pas les visiteurs d’un site à l’autre.
+          {site.monetize.adsense.client
+            ? 'Ce site affiche des publicités Google AdSense. Google et ses partenaires peuvent utiliser des cookies pour diffuser et mesurer ces annonces, uniquement avec votre consentement recueilli via le bandeau prévu à cet effet. Vous pouvez modifier votre choix à tout moment depuis ce bandeau.'
+            : 'Ce site ne dépose pas de cookie publicitaire.'}{' '}
+          La mesure d’audience, si elle est activée, utilise Cloudflare Web Analytics, qui ne dépose pas de cookie et ne
+          suit pas les visiteurs d’un site à l’autre. Les liens partenaires peuvent mener à des sites tiers qui appliquent
+          leur propre politique de cookies.
         </p>
       </S>
       <S title="Vos droits">
@@ -170,6 +174,10 @@ function Partners() {
           <li>
             <b>Liens partenaires</b> : lorsque vous cliquez vers le site d’un partenaire et demandez un devis ou souscrivez,
             nous pouvons percevoir une rémunération. Cela ne change pas le prix que vous payez.
+          </li>
+          <li>
+            <b>Publicité</b> : des annonces, signalées par la mention « Publicité », peuvent être affichées sur certaines
+            pages. Elles sont choisies par la régie publicitaire, pas par Clairassur.
           </li>
           <li>
             <b>Demandes de devis</b> : votre demande, avec votre accord, est transmise à des conseillers partenaires qui

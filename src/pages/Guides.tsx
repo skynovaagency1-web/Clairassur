@@ -1,10 +1,12 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
+import { AdSlot } from '../components/AdSlot'
 import { PageIntro } from '../components/PageIntro'
 import { CreditedPhoto, CtaPill, Mono, Reveal, Section } from '../components/ui'
 import { categoryPages, offerMeta } from '../content/categories'
 import { guidePath, guides, type Guide } from '../content/guides'
 import { photos } from '../content/photos'
+import { quoteHref } from '../lib/monetize'
 
 export function GuidesIndex() {
   return (
@@ -77,7 +79,7 @@ export function GuidePage({ g }: { g: Guide }) {
                 <Link to={`/${categoryPages[cat].slug}`} className={`pill pill-${offerMeta[cat].tint} justify-center`}>
                   Voir la page
                 </Link>
-                <CtaPill to={`/devis?type=${cat}`} className="justify-between">
+                <CtaPill to={quoteHref(cat)} className="justify-between">
                   Devis gratuit
                 </CtaPill>
               </div>
@@ -85,6 +87,7 @@ export function GuidePage({ g }: { g: Guide }) {
           </aside>
         </div>
       </Section>
+      <AdSlot className="pb-16" />
       <Section className="pt-0!">
         <Mono>À lire aussi</Mono>
         <div className="mt-6 grid gap-5 md:grid-cols-3">

@@ -61,7 +61,10 @@ Pour tester les fonctions en local : `npm run build && npx wrangler pages dev di
 
 ## Gagner de l'argent avec le site
 
-- **Fiche sponsorisée** : dans `src/data.ts`, ajoutez `sponsored: true` à un acteur sous contrat. Il passe en tête avec le badge « Sponsorisé ».
-- **Lien d'affiliation** : ajoutez `partnerUrl: 'https://…'` (lien fourni par Awin, Kwanko, Effiliation…). Le bouton « Site officiel » l'utilise, avec `rel="sponsored"`.
-- **Leads** : chaque demande du formulaire arrive par e-mail à `LEAD_TO_EMAIL`, avec le consentement de la personne.
-- Avant de percevoir des commissions d'assurance, vérifiez auprès de l'ORIAS si une immatriculation est nécessaire, puis renseignez `orias` dans `src/config.ts`.
+Tout se règle dans `src/config.ts`, bloc `monetize`. Tant qu'une valeur est vide, rien ne s'affiche pour elle.
+
+1. **Liens d'affiliation (comparateur)** : inscrivez-vous sur un réseau d'affiliation (Awin, Kwanko, Effiliation…), rejoignez le programme d'un comparateur d'assurance, puis collez vos liens de suivi dans `affiliate` (un par type, ou seulement `default`). Tous les boutons « Devis gratuit » envoient alors vers ce partenaire, avec la mention « lien partenaire ». Sans lien, le formulaire intégré est utilisé.
+2. **Publicité Google AdSense** : renseignez `adsense.client` (`ca-pub-…`) et `adsense.slot` (un bloc d'annonces « display »). Des emplacements « Publicité » apparaissent sur les pages par type, les guides et les fiches assureurs. Le script AdSense et `ads.txt` sont ajoutés automatiquement au build. Dans AdSense, activez le message de consentement Google (Confidentialité et messages) : il est obligatoire pour les visiteurs européens.
+3. **Fiche sponsorisée** : dans `src/data.ts`, `sponsored: true` et/ou `partnerUrl` sur un acteur sous contrat.
+
+Avant de percevoir des commissions liées à l'assurance, vérifiez auprès de l'ORIAS si une immatriculation est nécessaire, puis renseignez `orias` dans `src/config.ts`.

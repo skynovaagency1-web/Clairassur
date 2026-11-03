@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { categoryPages, offerMeta } from '../content/categories'
 import { photos } from '../content/photos'
 import { providers, type CategoryId } from '../data'
+import { quoteHref } from '../lib/monetize'
 import { CreditedPhoto, CtaPill } from './ui'
 
 /** Glass offer card: photo, mono index, serif title, "à partir de" price and two pills. */
@@ -40,7 +41,7 @@ export function OfferCard({ id, index }: { id: CategoryId; index: number }) {
             <Link to={`/${page.slug}`} className={`pill pill-${meta.tint}`}>
               Découvrir
             </Link>
-            <CtaPill to={`/devis?type=${id}`}>Devis</CtaPill>
+            <CtaPill to={quoteHref(id)}>Devis</CtaPill>
           </div>
         </div>
       </div>

@@ -4,7 +4,8 @@ import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { FaqList } from '../components/Faq'
 import { OfferCard, PRICE_NOTE } from '../components/OfferCard'
-import { QuoteForm } from '../components/QuoteForm'
+import { QuoteBlock } from '../components/QuoteBlock'
+import { quoteHref } from '../lib/monetize'
 import { CtaPill, Editorial, Mono, PhotoCredit, Reveal, Section, ease } from '../components/ui'
 import { categoryPages } from '../content/categories'
 import { guidePath, guides } from '../content/guides'
@@ -95,7 +96,7 @@ export function Home() {
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Editorial stack index="05" label="Devis gratuit" title="Un seul formulaire," em="plusieurs réponses." />
           <Reveal delay={0.1}>
-            <QuoteForm />
+            <QuoteBlock />
           </Reveal>
         </div>
       </Section>
@@ -178,7 +179,7 @@ function Hero() {
             className="flex w-full flex-wrap items-center justify-between gap-4"
           >
             <p className="max-w-md text-lg text-cream/90">L’assurance, posée et lisible. Trouvez qui vous protège, sans bruit.</p>
-            <CtaPill to="/devis">Recevoir mes devis</CtaPill>
+            <CtaPill to={quoteHref()}>Recevoir mes devis</CtaPill>
           </motion.div>
         </div>
       </motion.div>

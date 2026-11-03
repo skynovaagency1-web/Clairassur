@@ -4,7 +4,9 @@ import { ProviderCard } from '../components/Directory'
 import { FaqList } from '../components/Faq'
 import { PRICE_NOTE } from '../components/OfferCard'
 import { PageIntro } from '../components/PageIntro'
-import { QuoteForm } from '../components/QuoteForm'
+import { AdSlot } from '../components/AdSlot'
+import { QuoteBlock } from '../components/QuoteBlock'
+import { quoteHref } from '../lib/monetize'
 import { CreditedPhoto, CtaPill, Editorial, Mono, Reveal, Section } from '../components/ui'
 import { categoryPages, offerMeta } from '../content/categories'
 import { guidePath, guides } from '../content/guides'
@@ -22,7 +24,7 @@ export function CategoryPage({ id }: { id: CategoryId }) {
       <PageIntro crumbs={[{ label: page.title }]} label={`${meta.label} · ${list.length} acteurs`} title={page.title} em=".">
         <p>{page.intro[0]}</p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <CtaPill to={`/devis?type=${id}`}>Devis gratuit</CtaPill>
+          <CtaPill to={quoteHref(id)}>Devis gratuit</CtaPill>
           <a href="#acteurs" className={`pill pill-${meta.tint}`}>
             Voir les assureurs
           </a>
@@ -68,6 +70,8 @@ export function CategoryPage({ id }: { id: CategoryId }) {
         </ol>
       </Section>
 
+      <AdSlot className="pb-16" />
+
       <Section className="pt-0!">
         <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16">
           <Editorial index="03" label="Bien choisir" title="Nos" em="conseils." />
@@ -103,7 +107,7 @@ export function CategoryPage({ id }: { id: CategoryId }) {
             <p>Une demande, et un conseiller partenaire vous recontacte avec des propositions adaptées.</p>
           </Editorial>
           <Reveal delay={0.1}>
-            <QuoteForm category={id} />
+            <QuoteBlock category={id} />
           </Reveal>
         </div>
       </Section>

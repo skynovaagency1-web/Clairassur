@@ -9,9 +9,16 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
 const ssr = join(root, 'dist-ssr')
 
-const { render, siteRoutes, notFoundHead, SITE_URL } = await import(pathToFileURL(join(ssr, 'entry-server.js')).href)
+const { render, siteRoutes, notFoundHead, SITE_URL, site } = await import(pathToFileURL(join(ssr, 'entry-server.js')).href)
 
-const template = await readFile(join(dist, 'index.html'), 'utf8')
+let template = await readFile(join(dist, 'index.html'), 'utf8')
+const { client: adClient, slot: adSlot } = site.monetize.adsense
+if (adClient && adSlot) {
+  template = template.replace(
+    '<!--head-->',
+    `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}" crossorigin="anonymous"></script>\n    <!--head-->`,
+  )
+}
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 const jsonScript = (o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`
@@ -44,6 +51,11 @@ const urls = siteRoutes
   .join('\n')
 await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`)
 await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`)
+
+if (adClient) {
+  // ads.txt lets AdSense confirm you own the site.
+  await writeFile(join(dist, 'ads.txt'), `google.com, ${adClient.replace(/^ca-/, '')}, DIRECT, f08c47fec0942fa0\n`)
+}
 
 await rm(ssr, { recursive: true, force: true })
 console.log(`Prerendered ${siteRoutes.length} pages + 404, sitemap.xml, robots.txt`)

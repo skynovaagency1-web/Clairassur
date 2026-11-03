@@ -1,10 +1,12 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router'
 import { ProviderCard } from '../components/Directory'
+import { AdSlot } from '../components/AdSlot'
 import { PageIntro } from '../components/PageIntro'
 import { CtaPill, Editorial, Mono, Reveal, Section } from '../components/ui'
 import { categoryPages } from '../content/categories'
 import { providers, type Provider } from '../data'
+import { affiliateUrl, quoteHref } from '../lib/monetize'
 import { useSaved } from '../lib/saved'
 
 export function ProviderPage({ p }: { p: Provider }) {
@@ -20,7 +22,7 @@ export function ProviderPage({ p }: { p: Provider }) {
       <PageIntro crumbs={[{ label: 'Assureurs', to: '/assureurs' }, { label: p.name }]} label={p.kind} title={p.name}>
         <p>{p.pitch}</p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <CtaPill to={`/devis?type=${p.categories[0]}&assureur=${encodeURIComponent(p.name)}`}>Être rappelé·e</CtaPill>
+          <CtaPill to={quoteHref(p.categories[0], p.name)}>{affiliateUrl(p.categories[0]) ? 'Comparer les devis' : 'Être rappelé·e'}</CtaPill>
           <a
             href={p.partnerUrl ?? p.website}
             target="_blank"
@@ -82,6 +84,7 @@ export function ProviderPage({ p }: { p: Provider }) {
         </Reveal>
       </Section>
 
+      <AdSlot className="pb-16" />
       <Section className="pt-0!">
         <Editorial index="04" label="À comparer" title="Acteurs" em="similaires." />
         <div className="mt-12 grid gap-5 md:grid-cols-3">
