@@ -11,7 +11,7 @@ export function OfferCard({ id, index }: { id: CategoryId; index: number }) {
   const meta = offerMeta[id]
   const count = providers.filter((p) => p.categories.includes(id)).length
   return (
-    <article className="glass grid gap-6 p-4 sm:p-5 md:grid-cols-[1fr_1.1fr] md:gap-10">
+    <article className="glass glow grid gap-6 p-4 sm:p-5 md:grid-cols-[1fr_1.1fr] md:gap-10">
       <CreditedPhoto photo={photos[meta.photo]} imgClassName="aspect-[4/3] md:aspect-auto md:h-[19rem]" sizes="(min-width: 768px) 540px, 100vw" />
       <div className="flex flex-col px-2 pb-2 md:py-4 md:pr-6">
         <p className="mono text-taupe-deep">
