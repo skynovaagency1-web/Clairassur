@@ -2,7 +2,7 @@
 
 L'annuaire de l'assurance en France : auto, habitation, santé, vie, moto et professionnelle, au même endroit.
 
-Hébergé sur Cloudflare (Worker + D1 + R2) : voir « Hébergement » plus bas.
+Hébergé sur Cloudflare (Worker + D1 + R2), déployé automatiquement à chaque push sur `main` : voir « Hébergement » plus bas.
 
 ## Stack
 
