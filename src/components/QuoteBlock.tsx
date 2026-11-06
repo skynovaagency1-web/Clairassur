@@ -24,7 +24,7 @@ export function QuoteBlock({ category, provider }: { category?: CategoryId; prov
       <p className="mt-6 flex items-start gap-2 text-sm text-muted">
         <ShieldCheck className="mt-0.5 size-4 shrink-0 text-olive-deep" aria-hidden />
         <span>
-          Lien partenaire : Clairassur peut être rémunéré si vous demandez un devis, sans surcoût pour vous.{' '}
+          Lien partenaire : Clairesoassur peut être rémunéré si vous demandez un devis, sans surcoût pour vous.{' '}
           <Link to="/partenaires" className="text-ink underline">
             En savoir plus
           </Link>

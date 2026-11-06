@@ -1,4 +1,6 @@
-# Clairassur
+# Clairesoassur
+
+> Anciennement « Clairassur ». Les ressources Cloudflare (Worker `clairassur`, base `clairassur-db`, bucket `clairassur-photos`) gardent leur nom technique : seul le nom affiché a changé.
 
 L'annuaire de l'assurance en France : auto, habitation, santé, vie, moto et professionnelle, au même endroit.
 
@@ -61,7 +63,7 @@ La base D1 et le bucket R2 existent déjà dans le compte Cloudflare, et les tab
 | `ADMIN_PASSWORD` | Secret | Mot de passe de `/admin` (utilisateur : `admin`). **Obligatoire** pour voir les demandes. |
 | `BREVO_API_KEY` | Secret | Optionnel. Clé API Brevo pour recevoir les demandes par e-mail. |
 | `LEAD_TO_EMAIL` | Texte | Adresse qui reçoit chaque demande de devis |
-| `SENDER_EMAIL` | Texte | Expéditeur vérifié dans Brevo, ex. `no-reply@clairassur.com` |
+| `SENDER_EMAIL` | Texte | Expéditeur vérifié dans Brevo, ex. `no-reply@clairesoassur.com` |
 | `CONTACT_TO_EMAIL` | Texte | Optionnel. Reçoit les messages de contact (sinon `LEAD_TO_EMAIL`) |
 | `BREVO_NEWSLETTER_LIST_ID` | Texte | Optionnel. Liste Brevo des abonnés newsletter |
 | `BREVO_LEADS_LIST_ID` | Texte | Optionnel. Liste Brevo où copier les leads |

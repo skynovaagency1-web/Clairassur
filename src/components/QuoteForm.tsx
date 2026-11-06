@@ -97,7 +97,7 @@ export function QuoteForm({ category: initialCategory, provider: initialProvider
       <label className="flex items-start gap-3 text-sm leading-relaxed text-muted sm:col-span-2">
         <input type="checkbox" name="consent" required className="mt-1 size-4 shrink-0 accent-olive-dark" />
         <span>
-          J’accepte que Clairassur transmette ma demande à des conseillers partenaires afin d’être recontacté·e au sujet
+          J’accepte que Clairesoassur transmette ma demande à des conseillers partenaires afin d’être recontacté·e au sujet
           de mon assurance. Je peux retirer mon consentement à tout moment.{' '}
           <Link to="/confidentialite" className="text-ink underline">
             Confidentialité

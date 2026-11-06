@@ -75,7 +75,7 @@ export function ProviderPage({ p }: { p: Provider }) {
           </ul>
           <p className="mt-5 text-sm text-muted">
             Informations indicatives : seuls les documents de {p.name} font foi.
-            {p.partnerUrl && ' Lien partenaire : Clairassur peut être rémunéré si vous souscrivez, sans surcoût pour vous.'}{' '}
+            {p.partnerUrl && ' Lien partenaire : Clairesoassur peut être rémunéré si vous souscrivez, sans surcoût pour vous.'}{' '}
             <Link to="/partenaires" className="underline">
               Comment nous sommes financés
             </Link>
