@@ -349,8 +349,8 @@ export const providerPath = (p: Provider) => `/assureurs/${slugify(p.name)}`
 
 export const faqs = [
   {
-    q: 'Clairassur est-il un assureur ou un courtier ?',
-    a: "Non. Clairassur est un annuaire indépendant : nous vous aidons à découvrir les acteurs de l'assurance en France. Nous ne vendons pas de contrats. Le site est gratuit pour vous et financé par certains partenaires (fiches sponsorisées, liens partenaires, mise en relation), toujours signalés. Détails sur la page « Partenaires et rémunération ».",
+    q: 'Lumassur est-il un assureur ou un courtier ?',
+    a: "Non. Lumassur est un annuaire indépendant : nous vous aidons à découvrir les acteurs de l'assurance en France. Nous ne vendons pas de contrats. Le site est gratuit pour vous et financé par certains partenaires (fiches sponsorisées, liens partenaires, mise en relation), toujours signalés. Détails sur la page « Partenaires et rémunération ».",
   },
   {
     q: 'Comment sont choisis les assureurs présentés ?',
@@ -365,7 +365,7 @@ export const faqs = [
     a: "Pour l'auto, la moto et l'habitation, la loi Hamon permet de résilier à tout moment après un an. Pour la complémentaire santé, la résiliation infra-annuelle est possible après un an également.",
   },
   {
-    q: 'Je suis assureur, comment apparaître sur Clairassur ?',
+    q: 'Je suis assureur, comment apparaître sur Lumassur ?',
     a: 'Écrivez-nous via le formulaire de contact : nous étudions chaque demande de référencement.',
   },
 ]

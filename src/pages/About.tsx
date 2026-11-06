@@ -13,7 +13,7 @@ export function About() {
     <>
       <PageIntro crumbs={[{ label: 'À propos' }]} label="À propos" title="Une maison calme" em="pour l’assurance.">
         <p>
-          Clairassur est né d’un constat simple : choisir une assurance ne devrait pas ressembler à une négociation. Nous
+          Lumassur est né d’un constat simple : choisir une assurance ne devrait pas ressembler à une négociation. Nous
           rassemblons l’information, vous gardez la main.
         </p>
       </PageIntro>

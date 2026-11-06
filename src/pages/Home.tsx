@@ -28,7 +28,7 @@ export function Home() {
       <Section className="pt-24!">
         <Editorial index="01" label="Notre approche" title="L’assurance," em="enfin lisible.">
           <p>
-            Clairassur réunit les assureurs qui comptent en France et les présente simplement : ce qu’ils couvrent, à
+            Lumassur réunit les assureurs qui comptent en France et les présente simplement : ce qu’ils couvrent, à
             qui ils s’adressent, et comment les contacter. Sans pression, sans petites lignes.
           </p>
           <SearchBox />
@@ -169,7 +169,7 @@ function Hero() {
             transition={{ duration: 1.4, delay: 0.15, ease }}
             className="w-full font-serif text-[clamp(2rem,10.5vw,12.5rem)] leading-[0.85] font-medium text-cream uppercase"
           >
-            Clairassur
+            Lumassur
             <span className="sr-only"> : comparez les assureurs auto, habitation, santé, vie, moto et pro</span>
           </motion.h1>
           <motion.div

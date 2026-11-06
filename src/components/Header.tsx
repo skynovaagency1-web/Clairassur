@@ -13,8 +13,8 @@ export const navLinks = [
 
 export function Wordmark({ className = '' }: { className?: string }) {
   return (
-    <Link to="/" aria-label="Clairassur, accueil" className={`font-serif text-[1.25rem] font-medium tracking-[0.14em] sm:text-[1.45rem] sm:tracking-[0.18em] text-ink uppercase ${className}`}>
-      Clairassur
+    <Link to="/" aria-label="Lumassur, accueil" className={`font-serif text-[1.25rem] font-medium tracking-[0.14em] sm:text-[1.45rem] sm:tracking-[0.18em] text-ink uppercase ${className}`}>
+      Lumassur
     </Link>
   )
 }

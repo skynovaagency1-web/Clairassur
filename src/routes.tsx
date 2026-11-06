@@ -20,7 +20,7 @@ import { Providers } from './pages/Providers'
 
 export type SiteRoute = { path: string; head: Head; element: ReactElement; priority?: number }
 
-const t = (s: string) => `${s} · Clairassur`
+const t = (s: string) => `${s} · Lumassur`
 
 /** Every page of the site. Used both by the router and by the prerender step. */
 export const siteRoutes: SiteRoute[] = [
@@ -30,12 +30,12 @@ export const siteRoutes: SiteRoute[] = [
     head: {
       title: DEFAULT_TITLE,
       description:
-        'Clairassur vous aide à découvrir et comparer les assureurs en France : auto, habitation, santé, vie, moto et professionnelle, présentés simplement.',
+        'Lumassur vous aide à découvrir et comparer les assureurs en France : auto, habitation, santé, vie, moto et professionnelle, présentés simplement.',
       jsonLd: [
         {
           '@context': 'https://schema.org',
           '@type': 'WebSite',
-          name: 'Clairassur',
+          name: 'Lumassur',
           url: `${site.url}/`,
           inLanguage: 'fr-FR',
         },
@@ -115,7 +115,7 @@ export const siteRoutes: SiteRoute[] = [
             headline: g.title,
             description: g.metaDescription,
             inLanguage: 'fr-FR',
-            publisher: { '@type': 'Organization', name: 'Clairassur' },
+            publisher: { '@type': 'Organization', name: 'Lumassur' },
           },
         ],
       },
@@ -134,7 +134,7 @@ export const siteRoutes: SiteRoute[] = [
   {
     path: '/contact',
     priority: 0.4,
-    head: { title: t('Contact'), description: 'Contactez Clairassur : question, référencement d’un assureur ou partenariat.' },
+    head: { title: t('Contact'), description: 'Contactez Lumassur : question, référencement d’un assureur ou partenariat.' },
     element: <Contact />,
   },
   {
@@ -142,14 +142,14 @@ export const siteRoutes: SiteRoute[] = [
     priority: 0.4,
     head: {
       title: t('À propos'),
-      description: 'Clairassur, un annuaire indépendant et calme pour comprendre et choisir son assurance en France.',
+      description: 'Lumassur, un annuaire indépendant et calme pour comprendre et choisir son assurance en France.',
     },
     element: <About />,
   },
   ...(Object.keys(legalPages) as LegalPage[]).map((k) => ({
     path: `/${k}`,
     priority: 0.2,
-    head: { title: t(legalPages[k]), description: `${legalPages[k]} du site Clairassur.` },
+    head: { title: t(legalPages[k]), description: `${legalPages[k]} du site Lumassur.` },
     element: <Legal page={k} />,
   })),
 ]

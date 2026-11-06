@@ -1,4 +1,4 @@
-// Clairassur Worker. Static pages come from dist/ (prerendered at build time);
+// Lumassur Worker. Static pages come from dist/ (prerendered at build time);
 // only /api/*, /admin and /img/* reach this code (see run_worker_first in wrangler.jsonc).
 import { admin } from './admin'
 import { contact, lead, newsletter } from './forms'

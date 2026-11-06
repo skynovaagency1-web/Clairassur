@@ -68,8 +68,8 @@ export function Footer() {
               ))}
             </ul>
           </nav>
-          <nav aria-label="Clairassur">
-            <p className="mono text-taupe-deep">Clairassur</p>
+          <nav aria-label="Lumassur">
+            <p className="mono text-taupe-deep">Lumassur</p>
             <ul className="mt-4 space-y-2">
               {[
                 ['/assureurs', 'Tous les assureurs'],

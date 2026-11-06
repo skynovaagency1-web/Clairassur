@@ -1,10 +1,10 @@
 // Company details used by the legal pages and footer.
 // Replace every "[À compléter]" before going live.
 export const site = {
-  name: 'Clairassur',
+  name: 'Lumassur',
   /** Your domain: used for canonical URLs, the sitemap and structured data. */
-  url: 'https://clairassur.com',
-  contactEmail: 'contact@clairassur.com',
+  url: 'https://lumassur.fr',
+  contactEmail: 'contact@lumassur.fr',
   company: {
     legalName: '[À compléter : raison sociale]',
     legalForm: '[À compléter : micro-entreprise, SAS…]',
