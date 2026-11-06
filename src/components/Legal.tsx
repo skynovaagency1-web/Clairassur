@@ -75,13 +75,13 @@ function Mentions() {
       </S>
       <S title="Activité">
         <p>
-          Lumassur est un annuaire d’information sur l’assurance en France. Lumassur n’est pas un assureur et ne
+          Clairesoassur est un annuaire d’information sur l’assurance en France. Clairesoassur n’est pas un assureur et ne
           conclut aucun contrat. Les informations publiées sont indicatives : seuls les documents contractuels de
           l’assureur font foi.
         </p>
         {c.orias ? (
           <p>
-            Lumassur est immatriculé à l’ORIAS sous le n° {c.orias}. Autorité de contrôle : ACPR, 4 place de Budapest,
+            Clairesoassur est immatriculé à l’ORIAS sous le n° {c.orias}. Autorité de contrôle : ACPR, 4 place de Budapest,
             CS 92459, 75436 Paris Cedex 09.
           </p>
         ) : null}
@@ -175,7 +175,7 @@ function Terms() {
       </S>
       <S title="Le service">
         <p>
-          Lumassur est un annuaire d’information gratuit sur les assureurs et les assurances en France. Lumassur
+          Clairesoassur est un annuaire d’information gratuit sur les assureurs et les assurances en France. Clairesoassur
           n’est pas un assureur, ne vend aucun contrat et ne donne pas de conseil personnalisé au sens du Code des
           assurances. Les demandes de devis sont transmises, avec votre accord, à des conseillers partenaires qui vous
           recontactent directement.
@@ -208,7 +208,7 @@ function Terms() {
       </S>
       <S title="Responsabilité">
         <p>
-          Lumassur ne peut être tenu responsable d’un choix d’assurance fait sur la base des informations du site, ni
+          Clairesoassur ne peut être tenu responsable d’un choix d’assurance fait sur la base des informations du site, ni
           d’une indisponibilité temporaire du service. Le contrat que vous signez vous lie uniquement à l’assureur ou
           à l’intermédiaire concerné.
         </p>
@@ -232,9 +232,9 @@ function Terms() {
 function Partners() {
   return (
     <>
-      <S title="Comment Lumassur est financé">
+      <S title="Comment Clairesoassur est financé">
         <p>
-          Lumassur est gratuit pour vous. Pour financer le site, nous pouvons être rémunérés par certains partenaires :
+          Clairesoassur est gratuit pour vous. Pour financer le site, nous pouvons être rémunérés par certains partenaires :
         </p>
         <ul className="mt-3 space-y-2">
           <li>
@@ -247,7 +247,7 @@ function Partners() {
           </li>
           <li>
             <b>Publicité</b> : des annonces, signalées par la mention « Publicité », peuvent être affichées sur certaines
-            pages. Elles sont choisies par la régie publicitaire, pas par Lumassur.
+            pages. Elles sont choisies par la régie publicitaire, pas par Clairesoassur.
           </li>
           <li>
             <b>Demandes de devis</b> : votre demande, avec votre accord, est transmise à des conseillers partenaires qui
@@ -258,7 +258,7 @@ function Partners() {
       <S title="Notre engagement">
         <p>
           Les contenus éditoriaux (descriptions, guides) ne sont pas rédigés par les partenaires. L’ordre d’affichage hors
-          fiches sponsorisées ne constitue ni un classement ni une recommandation. Lumassur ne présente pas une analyse
+          fiches sponsorisées ne constitue ni un classement ni une recommandation. Clairesoassur ne présente pas une analyse
           exhaustive du marché.
         </p>
       </S>

@@ -39,7 +39,7 @@ const noStore = { 'cache-control': 'no-store', 'x-robots-tag': 'noindex', 'x-fra
 export async function admin(request: Request, env: Env, url: URL) {
   if (!env.ADMIN_PASSWORD) return new Response('Admin désactivé : ajoutez le secret ADMIN_PASSWORD dans Cloudflare.', { status: 503, headers: noStore })
   if (!authorized(request, env))
-    return new Response('Identifiants requis.', { status: 401, headers: { ...noStore, 'www-authenticate': 'Basic realm="Lumassur admin", charset="UTF-8"' } })
+    return new Response('Identifiants requis.', { status: 401, headers: { ...noStore, 'www-authenticate': 'Basic realm="Clairesoassur admin", charset="UTF-8"' } })
 
   if (request.method === 'POST') {
     // Basic auth is sent automatically by the browser, so refuse forms posted from other sites.
@@ -78,7 +78,7 @@ async function exportCsv(env: Env, table: Table) {
   }
   const csv = [TABLES[table].cols.join(';'), ...results.map((r) => TABLES[table].cols.map((c) => cell(r[c])).join(';'))].join('\r\n')
   return new Response('﻿' + csv, {
-    headers: { ...noStore, 'content-type': 'text/csv; charset=utf-8', 'content-disposition': `attachment; filename="lumassur-${table}-${new Date().toISOString().slice(0, 10)}.csv"` },
+    headers: { ...noStore, 'content-type': 'text/csv; charset=utf-8', 'content-disposition': `attachment; filename="clairesoassur-${table}-${new Date().toISOString().slice(0, 10)}.csv"` },
   })
 }
 
@@ -128,7 +128,7 @@ async function page(env: Env, table: Table, q: string) {
         ? ['Date', 'Sujet', 'Nom', 'E-mail', 'Message', 'Statut', '']
         : ['Date', 'E-mail', '']
 
-  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Admin · Lumassur</title>
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Admin · Clairesoassur</title>
 <style>
 :root{--ink:#2b2622;--muted:#7a6f66;--bg:#f4efea;--card:#fffdfb;--line:#e6ddd4;--accent:#5b5a3c}
 *{box-sizing:border-box}body{margin:0;font:15px/1.45 system-ui,sans-serif;color:var(--ink);background:var(--bg)}
@@ -145,7 +145,7 @@ td.msg{max-width:340px;white-space:pre-wrap}tr.nouveau td:first-child{box-shadow
 form{margin:0}select{padding:4px 6px;border-radius:8px;border:1px solid var(--line)}.del{border:0;background:none;color:#a33;cursor:pointer;padding:0}
 .empty{padding:40px;text-align:center;color:var(--muted)}
 </style></head><body>
-<header><h1>Lumassur · admin</h1><nav>${tabs}</nav></header>
+<header><h1>Clairesoassur · admin</h1><nav>${tabs}</nav></header>
 <form class="bar" method="get" action="/admin"><input type="hidden" name="t" value="${table}"><input name="q" value="${h(q)}" placeholder="Rechercher (e-mail, nom, code postal…)"><button>Rechercher</button><a href="/admin/export/${table}.csv">Exporter en CSV</a></form>
 <div class="wrap">${results.length ? `<table><thead><tr>${head.map((x) => `<th>${x}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>` : '<p class="empty">Rien pour le moment.</p>'}</div>
 </body></html>`

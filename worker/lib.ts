@@ -1,4 +1,4 @@
-// Shared helpers for the Lumassur Worker.
+// Shared helpers for the Clairesoassur Worker.
 
 export type Env = {
   ASSETS: Fetcher
@@ -8,11 +8,11 @@ export type Env = {
   ADMIN_PASSWORD?: string
   /** Optional: Brevo API key, to get each lead and message by e-mail too. Set as a secret. */
   BREVO_API_KEY?: string
-  /** Where new quote requests are e-mailed, e.g. "leads@lumassur.fr" */
+  /** Where new quote requests are e-mailed, e.g. "leads@clairesoassur.com" */
   LEAD_TO_EMAIL?: string
   /** Where contact-form messages go (defaults to LEAD_TO_EMAIL) */
   CONTACT_TO_EMAIL?: string
-  /** Verified Brevo sender, e.g. "no-reply@lumassur.fr" */
+  /** Verified Brevo sender, e.g. "no-reply@clairesoassur.com" */
   SENDER_EMAIL?: string
   /** Brevo list id for newsletter subscribers */
   BREVO_NEWSLETTER_LIST_ID?: string
@@ -51,7 +51,7 @@ export async function brevo(env: Env, path: string, body: unknown, allowDuplicat
 
 export async function sendEmail(env: Env, to: string, replyTo: { email: string; name: string }, subject: string, html: string) {
   await brevo(env, '/smtp/email', {
-    sender: { name: 'Lumassur', email: env.SENDER_EMAIL },
+    sender: { name: 'Clairesoassur', email: env.SENDER_EMAIL },
     to: [{ email: to }],
     replyTo,
     subject,

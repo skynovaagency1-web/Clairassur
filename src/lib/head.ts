@@ -9,7 +9,7 @@ export type Head = {
 }
 
 export const SITE_URL = site.url
-export const DEFAULT_TITLE = 'Lumassur · L’annuaire de l’assurance en France'
+export const DEFAULT_TITLE = 'Clairesoassur · L’annuaire de l’assurance en France'
 
 /** Keeps the title and description in sync during client-side navigation.
  *  The prerender step writes the same values into each page's static HTML. */
